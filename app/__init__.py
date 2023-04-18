@@ -4,7 +4,6 @@ from flask_bootstrap import Bootstrap
 from flask_moment import Moment 
 from flask_sqlalchemy import SQLAlchemy 
 from .config import config
-from flask_migrate import Migrate
 
 bootstrap = Bootstrap() 
 #mail = Mail() 
@@ -19,7 +18,6 @@ def create_app(config_name):
     bootstrap.init_app(app)
     moment.init_app(app)
     db.init_app(app)
-    migrate = Migrate(app, db)
 
     # routes
     from .main import main as main_blueprint 
