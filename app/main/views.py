@@ -1,7 +1,7 @@
 from datetime import datetime 
 from flask import render_template, session, redirect, url_for 
 from . import main 
-from .forms import NameForm 
+from .forms import NameForm, CustomerApplicationForm
 from .. import db 
 from ..models import User
 
@@ -21,4 +21,9 @@ def dashboard():
 
 @main.route('/new_application', methods=['GET', 'POST'])
 def new_application():
-   return render_template('Client-Application.html')
+   form = CustomerApplicationForm()
+   if form.validate_on_submit():
+      # ...
+      return redirect(url_for('.new_application'))
+
+   return render_template('Client-Application.html', form=form)

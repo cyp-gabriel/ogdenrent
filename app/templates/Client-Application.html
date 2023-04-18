@@ -1,3 +1,5 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="en"><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,68 +61,7 @@ border-width: 2px !important; border-color: #511026 !important; borders: bottom 
     <section class="u-clearfix u-section-1" id="sec-0ac0">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-custom-color-5 u-expanded-width u-form u-form-1">
-          <form action="https://forms.nicepagesrv.com/v2/form/process" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form" style="padding: 10px;">
-            <div class="u-form-group u-form-name">
-              <label for="name-aa08" class="u-label">First name</label>
-              <input type="text" placeholder="Enter your Name" id="name-aa08" name="first_name" class="u-input u-input-rectangle" required="">
-            </div>
-            <div class="u-form-group u-form-group-2">
-              <label for="text-0816" class="u-label">Last name</label>
-              <input type="text" placeholder="" id="text-0816" name="last_name" class="u-input u-input-rectangle" required="required">
-            </div>
-            <div class="u-form-email u-form-group">
-              <label for="email-aa08" class="u-label">Email</label>
-              <input type="email" placeholder="Enter a valid email address" id="email-aa08" name="email" class="u-input u-input-rectangle" required="">
-            </div>
-            <div class="u-form-group u-form-group-4">
-              <label for="text-60b6" class="u-label">Phone</label>
-              <input type="text" placeholder="" id="text-60b6" name="phone" class="u-input u-input-rectangle" required="required">
-            </div>
-            <div class="u-form-group u-form-group-5">
-              <label for="text-abad" class="u-label">SSN</label>
-              <input type="text" id="text-abad" name="ss_number" class="u-input u-input-rectangle" required="required">
-            </div>
-            <div class="u-form-group u-form-group-6">
-              <label for="text-4f9a" class="u-label">Driver's license #</label>
-              <input type="text" id="text-4f9a" name="license_number" class="u-input u-input-rectangle">
-            </div>
-            <div class="u-form-group u-form-group-7">
-              <label for="text-9be3" class="u-label">State</label>
-              <input type="text" id="text-9be3" name="state" class="u-input u-input-rectangle">
-            </div>
-            <div class="u-form-group u-form-group-8">
-              <label for="text-6461" class="u-label">State ID</label>
-              <input type="text" id="text-6461" name="state_id" class="u-input u-input-rectangle">
-            </div>
-            <div class="u-form-date u-form-group u-form-group-9">
-              <label for="date-3438" class="u-label">Date of Birth</label>
-              <input type="text" readonly="readonly" placeholder="MM/DD/YYYY" id="date-3438" name="dob" class="u-input u-input-rectangle" required="" data-date-format="mm/dd/yyyy">
-            </div>
-            <div class="u-form-group u-form-group-10">
-              <label for="text-37c7" class="u-label">Last permanent address</label>
-              <input type="text" placeholder="" id="text-37c7" name="last_perm_addr_st" class="u-input u-input-rectangle">
-            </div>
-            <div class="u-form-group u-form-group-11">
-              <label for="text-87fa" class="u-label">City</label>
-              <input type="text" id="text-87fa" name="last_perm_addr_city" class="u-input u-input-rectangle">
-            </div>
-            <div class="u-form-group u-form-group-12">
-              <label for="text-b433" class="u-label">State</label>
-              <input type="text" id="text-b433" name="last_perm_addr_state" class="u-input u-input-rectangle">
-            </div>
-            <div class="u-form-group u-form-group-13">
-              <label for="text-b30b" class="u-label">Number of Adults living w/you</label>
-              <input type="text" placeholder="" id="text-b30b" name="num_adults" class="u-input u-input-rectangle">
-            </div>
-            <div class="u-align-left u-form-group u-form-submit">
-              <a href="#" class="u-border-none u-btn u-btn-submit u-button-style u-btn-1">Submit</a>
-              <input type="submit" value="submit" class="u-form-control-hidden">
-            </div>
-            <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
-            <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
-            <input type="hidden" value="" name="recaptchaResponse">
-            <input type="hidden" name="formServices" value="e71ccc9a82231638ea5fb162b24a6377">
-          </form>
+            {{ wtf.quick_form(form) }}
         </div>
       </div>
     </section>
