@@ -13,4 +13,12 @@ def index():
 
       return redirect(url_for('.index'))
 
-   return render_template('index.html', form=form, name=session.get('name'), known=session.get('known', False), current_time=datetime.utcnow())
+   return render_template('index.html')
+
+@main.route('/dashboard', methods=['GET', 'POST'])
+def dashboard():
+   return render_template('Dashboard.html')
+
+@main.route('/new_application', methods=['GET', 'POST'])
+def new_application():
+   return render_template('Client-Application.html')
