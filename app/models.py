@@ -1,6 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from flask import current_app
+from datetime import datetime
 from . import db
 
 class Permission: 
@@ -96,3 +97,17 @@ class Role(db.Model):
             db.session.add(role)
         
         db.session.commit()
+
+class Customer(db.Model):
+    __tablename__ = 'customers'
+    id = db.Column(db.Integer, primary_key=True)
+
+    first_name = db.Column(db.String(64))
+    last_name = db.Column(db.String(64))
+    dob = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    phone = db.Column(db.String(64))
+    ssn = db.Column(db.String(64))
+    email = db.Column(db.String(64))
+
+    def __init__(self, **kwargs):
+        super(Customer, self).__init__(**kwargs)

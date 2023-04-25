@@ -61,7 +61,14 @@ border-width: 2px !important; border-color: #511026 !important; borders: bottom 
     <section class="u-clearfix u-section-1" id="sec-0ac0">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-custom-color-5 u-expanded-width u-form u-form-1">
-            {{ wtf.quick_form(form) }}
+
+
+          <form method="post" action="{{ url_for('main.new_application') }}" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px;">
+            {{ form.first_name.label(class_="u-label") }}
+            {{ form.first_name(class_="u-input u-input-rectangle") }}
+          </form>
+
+
         </div>
       </div>
     </section>
