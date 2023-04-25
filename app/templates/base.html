@@ -1,33 +1,30 @@
-{% extends "bootstrap/base.html" %}
+<!doctype html>
+<html lang="en">
+    <head>
+        {% block head %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-{% block title %}Ogden.Rent{% endblock %}
+        {% block styles %}
+            <!-- Bootstrap CSS -->
+            {{ bootstrap.load_css() }}
+        {% endblock %}
 
-{% block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="/">Ogden.Rent</a>
-		</div>
-		<div class="navbar-collapse collapse">
-			<ul class="nav navbar-nav">
-				<li>
-					<a href="/">Home</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-</div>
-{% endblock %}
+        <title>Your page title</title>
+        {% endblock %}
+    </head>
+    <body>
+        {% block navbar %}{% endblock %}
 
-{% block content %}
-    <div class="container">
-        {# application content needs to be provided in the app_content block #}
-        {% block app_content %}{% endblock %}
-    </div>
-{% endblock %}
+        <!-- Your page content -->
+        {% block content %}{% endblock %}
+
+        {% block footer %}{% endblock %}
+
+        {% block scripts %}
+            <!-- Optional JavaScript -->
+            {{ bootstrap.load_js() }}
+        {% endblock %}
+    </body>
+</html>
