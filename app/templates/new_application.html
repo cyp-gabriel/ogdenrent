@@ -4,6 +4,7 @@
   {{ super() }}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/Navbar-Centered-Links-icons.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/new_application.css') }}">
 {% endblock %}
 
 {% block navbar %}
@@ -36,10 +37,46 @@
 {% endblock %}
 
 {% block app_content %}
-<div class="container-fluid index-hero">
-    <div class="row g-0 index-hero-row">
-        <div class="col align-self-center">
-            <h1 class="display-3">Lease Application</h1><a class="btn btn-info btn-lg d-none d-sm-none d-md-none d-lg-inline-flex d-xl-inline-flex d-xxl-inline-flex index-hero-btn" role="button" href="/new_application">Sign up</a><a class="btn btn-info d-lg-none d-xl-none d-xxl-none index-hero-btn-small" role="button" href="/new_application">Sign up</a>
+<div class="container d-xl-flex align-items-sm-start newapp-content">
+    <div class="row newapp-content-row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 newapp-content-bg-color">
+            <!-- 
+            <form method="post" action="">
+                <label class="form-label">First name</label>
+                <input class="form-control" type="text" name="first_name" placeholder="Ted"/>
+                <label class="form-label">Last name</label>
+                <input class="form-control" type="text" name="last_name" placeholder="Bell"/>
+                <label class="form-label">Phone #</label>
+                <input class="form-control" type="tel" placeholder="385-999-2345" name="phone"/>
+                <label class="form-label">Email</label>
+                <input class="form-control" type="tel" placeholder="ted@bell.com" name="email"/>
+                <label class="form-label">Social Security #</label>
+                <input class="form-control" type="text" name="ssn" placeholder="544-21-4556"/>
+                <label class="form-label">Driver's license #</label>
+                <input class="form-control" type="text" name="drivers_license" placeholder="6019876"/>
+                <button type="submit" class="btn btn-primary d-inline-flex float-end newapp-content-submit-btn" >Submit</button>
+            </form>
+            
+        -->
+    
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                {{ form.first_name.label }} {{ form.first_name(class="form-control") }}
+                {{ form.last_name.label }} {{ form.last_name(class="form-control") }}
+                {{ form.dob.label }} {{ form.dob(class="form-control") }}
+                {{ form.phone.label }} {{ form.phone(class="form-control") }}
+                {{ form.ssn.label }} {{ form.ssn(class="form-control") }}
+                {{ form.email.label }} {{ form.email(class="form-control") }}
+                {{ form.submit(class="btn btn-primary d-inline-flex float-end newapp-content-submit-btn") }}
+
+                <div class="form-check newapp-checkbox">
+                    <input id="formCheck-1" class="form-check-input" type="checkbox" name="clear" value="clear_value" checked />
+                    <label class="form-check-label" for="formCheck-1">
+                       Clear
+                    </label>
+                 </div>
+
+            </form>
         </div>
     </div>
 </div>

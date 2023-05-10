@@ -4,6 +4,7 @@
   {{ super() }}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/Navbar-Centered-Links-icons.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="javascript" href="{{ url_for('static', filename='js/dashboard.js') }}">
 {% endblock %}
 
 {% block navbar %}
@@ -36,10 +37,59 @@
 {% endblock %}
 
 {% block app_content %}
-<div class="container-fluid index-hero">
-    <div class="row g-0 index-hero-row">
-        <div class="col align-self-center">
-            <h1 class="display-3">Lease Application</h1><a class="btn btn-info btn-lg d-none d-sm-none d-md-none d-lg-inline-flex d-xl-inline-flex d-xxl-inline-flex index-hero-btn" role="button" href="/new_application">Sign up</a><a class="btn btn-info d-lg-none d-xl-none d-xxl-none index-hero-btn-small" role="button" href="/new_application">Sign up</a>
+<div class="container dash-content">
+   {% for message in get_flashed_messages() %}
+   <div class="alert alert-warning">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ message }}
+   </div>
+   {% endfor %}
+
+    <h2 class="display-6 dash-heading">Dashboard</h2>
+    <div class="row">
+        <div class="col">
+            <div>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">Customers</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">New</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" role="tabpanel" id="tab-1">
+
+                        <div class="dash-customer-listing">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: center;">Actions</th>
+                                            <th>Full name</th>
+                                            <th>Email</th>
+                                            <th><br>Phone</th>
+                                            <th>SSN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for c in customers %}
+                                        <tr>
+                                            <td class="dash-centered">
+                                                <button id="{{ "btn-submit-%d" % c.id }}" class="btn btn-primary btn-sm">Delete</button>
+                                            </td>
+                                            <td><a href="{{ url_for('main.edit_customer', customer_id=c.id) }}">{{ c.first_name + ' ' + c.last_name }}</a></td>
+                                            <td>{{ c.email }}</td>
+                                            <td>{{ c.phone }}</td>
+                                            <td>{{ c.ssn }}</td>
+                                        {% endfor %}
+                                        
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="tab-2">
+                        <p>Content for tab 2.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
