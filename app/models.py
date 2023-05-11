@@ -109,5 +109,16 @@ class Customer(db.Model):
     ssn = db.Column(db.String(64))
     email = db.Column(db.String(64))
 
+
+    num_pets = db.Column(db.Integer)
+    num_kids = db.Column(db.Integer)
+    has_pets = db.Column(db.Boolean)
+
+    prev_addr_street1 = db.Column(db.String(64))
+    prev_addr_street2 = db.Column(db.String(64))
+    prev_addr_city = db.Column(db.String(64))
+    prev_addr_state = db.Column(db.String(64))
+    prev_addr_zip = db.Column(db.String(64))
+
     def __init__(self, **kwargs):
         super(Customer, self).__init__(**kwargs)

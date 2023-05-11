@@ -17,7 +17,8 @@ def index():
 @main.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
    customers = Customer.query.all()
-   return render_template('dashboard.html', customers=customers)
+   form = CustomerApplicationForm()
+   return render_template('dashboard.html', form=form, customers=customers)
 
 @main.route('/new_application', methods=['GET', 'POST'])
 def new_application():
@@ -37,7 +38,17 @@ def new_application():
          dob=form.dob.data,
          phone=form.phone.data,
          ssn=form.ssn.data,
-         email=form.email.data)
+         email=form.email.data,
+
+         num_pets=form.num_pets,
+         num_kids=form.num_kids,
+         has_pets=form.has_pets,
+
+         prev_addr_street1=form.prev_addr_street1,
+         prev_addr_street2=form.prev_addr_street2,
+         prev_addr_city=form.prev_addr_city,
+         prev_addr_state=form.prev_addr_state,
+         prev_addr_zip=form.prev_addr_zip)
       db.session.add(customer)
       db.session.commit()
 
@@ -61,6 +72,16 @@ def edit_customer(customer_id):
          form.phone.data = c.phone
          form.ssn.data = c.ssn
          form.email.data = c.email
+
+         form.num_pets = c.form.num_pets 
+         form.num_kids = c.form.num_kids 
+         form.has_pets = c.form.has_pets 
+
+         form.prev_addr_street1 = c.form.prev_addr_street1 
+         form.prev_addr_street2 = c.form.prev_addr_street2 
+         form.prev_addr_city = c.form.prev_addr_city 
+         form.prev_addr_state = c.form.prev_addr_state 
+         form.prev_addr_zip = c.form.prev_addr_zip 
 
       elif request.method == 'POST' and form.validate():
          save_changes(c, form)
