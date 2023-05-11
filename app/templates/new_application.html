@@ -50,3 +50,9 @@
 </div> <!-- container -->
 {% endblock %}
 
+{% block scripts %}
+   {{ super() }}
+
+   <!-- Optional JavaScript -->
+   <script src="{{ url_for('static', filename='js/multipart_form.js') }}"></script>
+{% endblock %}

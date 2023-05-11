@@ -2,9 +2,14 @@
 
 {% block head %}
   {{ super() }}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/Navbar-Centered-Links-icons.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-  <link rel="javascript" href="{{ url_for('static', filename='js/dashboard.js') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Navbar-Centered-Links-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="javascript" href="{{ url_for('static', filename='js/dashboard.js') }}">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/multipart_form.css') }}">
+    <script type='text/javascript' src="{{ url_for('static', filename='js/multipart_form.js') }}"></script>
 {% endblock %}
 
 {% block app_content %}
@@ -52,34 +57,90 @@
 
                     <!-- Tab 2 -->
                     <div class="tab-pane" role="tabpanel" id="tab-2">
-                        <div class="container d-xl-flex align-items-sm-start">
-                            <div class="row newapp-content-row">
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
-                                    <form method="POST">
-                                        
-                                        {{ form.first_name.label }} {{ form.first_name(class="form-control") }}
-                                        {{ form.last_name.label }} {{ form.last_name(class="form-control") }}
-                                        {{ form.dob.label }} {{ form.dob(class="form-control") }}
-                                        {{ form.phone.label }} {{ form.phone(class="form-control") }}
-                                        {{ form.ssn.label }} {{ form.ssn(class="form-control") }}
-                                        {{ form.email.label }} {{ form.email(class="form-control") }}
-                                        {{ form.submit(class="btn btn-primary d-inline-flex float-end newapp-content-submit-btn") }}
 
-                                        <div class="form-check newapp-checkbox">
-                                            <input id="formCheck-1" class="form-check-input" type="checkbox" name="clear" value="clear_value" checked />
-                                            <label class="form-check-label" for="formCheck-1">
-                                            Clear
-                                            </label>
-                                        </div>
-
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'multipart_form.html' %}
 
                     </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+   {{ super() }}
+
+   <!-- Optional JavaScript -->
+   <script type='text/javascript' src='#'></script>
+   <script type='text/javascript' src='#'></script>
+   <script type='text/javascript' src='#'></script>
+   <script type='text/javascript'>
+       $(document).ready(function() {
+           var current_fs, next_fs, previous_fs; //fieldsets
+           var opacity;
+           $(".next").click(function() {
+               current_fs = $(this).parent();
+               next_fs = $(this).parent().next();
+               //Add Class Active
+               $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+               //show the next fieldset
+               next_fs.show();
+               //hide the current fieldset with style
+               current_fs.animate({
+                   opacity: 0
+               }, {
+                   step: function(now) {
+                       // for making fielset appear animation
+                       opacity = 1 - now;
+                       current_fs.css({
+                           'display': 'none',
+                           'position': 'relative'
+                       });
+                       next_fs.css({
+                           'opacity': opacity
+                       });
+                   },
+                   duration: 600
+               });
+           });
+           $(".previous").click(function() {
+               current_fs = $(this).parent();
+               previous_fs = $(this).parent().prev();
+               //Remove class active
+               $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+               //show the previous fieldset
+               previous_fs.show();
+               //hide the current fieldset with style
+               current_fs.animate({
+                   opacity: 0
+               }, {
+                   step: function(now) {
+                       // for making fielset appear animation
+                       opacity = 1 - now;
+                       current_fs.css({
+                           'display': 'none',
+                           'position': 'relative'
+                       });
+                       previous_fs.css({
+                           'opacity': opacity
+                       });
+                   },
+                   duration: 600
+               });
+           });
+           $('.radio-group .radio').click(function() {
+               $(this).parent().find('.radio').removeClass('selected');
+               $(this).addClass('selected');
+           });
+           $(".submit").click(function() {
+               return false;
+           })
+       });
+   </script>
+   <script type='text/javascript'>
+       var myLink = document.querySelector('a[href="#"]');
+       myLink.addEventListener('click', function(e) {
+           e.preventDefault();
+       });
+   </script>
 {% endblock %}
