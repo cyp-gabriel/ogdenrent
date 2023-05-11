@@ -109,7 +109,6 @@ class Customer(db.Model):
     ssn = db.Column(db.String(64))
     email = db.Column(db.String(64))
 
-
     num_pets = db.Column(db.Integer)
     num_kids = db.Column(db.Integer)
     has_pets = db.Column(db.Boolean)

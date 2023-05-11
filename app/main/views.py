@@ -23,6 +23,7 @@ def dashboard():
 @main.route('/new_application', methods=['GET', 'POST'])
 def new_application():
    form = CustomerApplicationForm()
+   form.ssn.data = '522-21-6667'
 
    if form.validate_on_submit():
 
@@ -32,29 +33,34 @@ def new_application():
          db.session.commit()
 
       # add new customer to database
-      customer = Customer(
-         first_name=form.first_name.data,
-         last_name=form.last_name.data,
-         dob=form.dob.data,
-         phone=form.phone.data,
-         ssn=form.ssn.data,
-         email=form.email.data,
+      c = Customer()
+      c.first_name = form.first_name.data
+      c.last_name = form.last_name.data
+      c.dob = form.dob.data
+      c.phone = form.phone.data
+      c.ssn = form.ssn.data
+      c.email = form.email.data
 
-         num_pets=form.num_pets,
-         num_kids=form.num_kids,
-         has_pets=form.has_pets,
+      # num_pets = form.num_pets
+      # num_kids = form.num_kids
+      # has_pets = form.has_pets
+      c.num_pets = 0
+      c.num_kids = 0
+      c.has_pets = False
 
-         prev_addr_street1=form.prev_addr_street1,
-         prev_addr_street2=form.prev_addr_street2,
-         prev_addr_city=form.prev_addr_city,
-         prev_addr_state=form.prev_addr_state,
-         prev_addr_zip=form.prev_addr_zip)
-      db.session.add(customer)
+      c.prev_addr_street1 = form.prev_addr_street1.data
+      c.prev_addr_street2 = form.prev_addr_street2.data
+      c.prev_addr_city = form.prev_addr_city.data
+      c.prev_addr_state = form.prev_addr_state.data
+      c.prev_addr_zip = form.prev_addr_zip.data
+
+
+      db.session.add(c)
       db.session.commit()
 
       flash('Thanks for submitting your name, fiend.  Now leave, please.')
 
-      return redirect(url_for('main.index'))
+      # return redirect(url_for('main.index'))
 
    return render_template('new_application.html', form=form)
 
