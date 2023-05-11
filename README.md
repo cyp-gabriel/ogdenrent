@@ -6,11 +6,14 @@
 - added formatting to new_application template
 - refactored header and footer into base template
 
-T - update database scheme with new fields
-T - test UI again
+* T - update database scheme with new fields
+
+T - Dashboard -> Customers/New
+. added UI portion of multi part form
 
 T - Home -> Sign up
-* . get submit working
+. finish adding rest of controls
+. test
 
 T - Dashboard -> Customers/New
 . add new_application
