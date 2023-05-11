@@ -9,6 +9,9 @@
 T - update database scheme with new fields
 T - test UI again
 
+T - Home -> Sign up
+* . get submit working
+
 T - Dashboard -> Customers/New
 . add new_application
 
