@@ -1,8 +1,10 @@
 [![Contact me on Codementor](https://www.codementor.io/m-badges/boonecabal/im-a-cm-b.svg)](https://www.codementor.io/@boonecabal?refer=badge)
 
-## Current
+## Current Tasks
 
-### Last Tasks Completed
+T - API: active_customer
+* added api, auth blueprints
+
 T - Dashboard -> Customers/New
 . replaced previous multi step form with newer, cleaner form 
 
@@ -13,7 +15,7 @@ T - Home -> Sign up
 T - Dashboard -> Customers/New
 . add new_application
 
-### Use Cases
+## Use Cases
 
 Create customer
 Go to Dashboard -> Customers
