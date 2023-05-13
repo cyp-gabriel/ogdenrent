@@ -54,9 +54,14 @@ def test(coverage, test_names):
 
 @app.cli.command()
 def	deploy():
-		"""Run deployment	tasks."""
-		#	migrate	database to	latest revision
-		upgrade()
+    """Run deployment	tasks."""
+    #	migrate	database to	latest revision
+    upgrade()
 
-		#	create or	update user	roles
-		Role.insert_roles()
+    #	create or	update user	roles
+    Role.insert_roles()
+
+    # insert one user
+    u = User(email='john@example.com', username='john', password='cat')
+    db.session.add(u)
+    db.session.commit()

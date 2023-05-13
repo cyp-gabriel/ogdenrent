@@ -7,6 +7,9 @@ T - API: active_customer
 * reworked file structure of overall project
 * got migrate working
 * got unittest working
+* got test_register_and_login working
+
+T - unittest: get confirm working
 
 T - Dashboard -> Customers/New
 . replaced previous multi step form with newer, cleaner form 
