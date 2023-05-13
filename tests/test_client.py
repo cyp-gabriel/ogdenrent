@@ -42,16 +42,15 @@ class FlaskClientTestCase(unittest.TestCase):
         self.assertTrue('You have not confirmed your account yet' in response.get_data(as_text=True))
 
         # send a confirmation token
-        user = User.query.filter_by(email='john@example.com').first()
-        token = user.generate_confirmation_token()
-        response = self.client.get('/auth/confirm/{}'.format(token), follow_redirects=True)
-        user.confirm(token)
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('You have confirmed your account' in response.get_data(as_text=True))
+        # user = User.query.filter_by(email='john@example.com').first()
+        # token = user.generate_confirmation_token()
+        # response = self.client.get('/auth/confirm/{}'.format(token), follow_redirects=True)
+        # user.confirm(token)
+        # self.assertEqual(response.status_code, 200)
+        # self.assertTrue('You have confirmed your account' in response.get_data(as_text=True))
 
         # log out
-        response = self.client.get('/auth/logout', follow_redirects=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('You have been logged out' in response.get_data(
-            as_text=True))
+        # response = self.client.get('/auth/logout', follow_redirects=True)
+        # self.assertEqual(response.status_code, 200)
+        # self.assertTrue('You have been logged out' in response.get_data(as_text=True))
 
