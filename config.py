@@ -11,7 +11,7 @@ class Config:
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     OGDENRENT_MAIL_SUBJECT_PREFIX = '[ogdenrent]'
-    OGDENRENT_MAIL_SENDER = 'ogdenrent Admin <ogdenrent@example.com>'
+    OGDENRENT_MAIL_SENDER = 'Rhomboid Goatcabin <grhomboid@gmail.com>'
     OGDENRENT_ADMIN = os.environ.get('OGDENRENT_ADMIN')
     SSL_REDIRECT = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False

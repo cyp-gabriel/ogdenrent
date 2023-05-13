@@ -4,6 +4,9 @@
 
 T - API: active_customer
 * added api, auth blueprints
+* reworked file structure of overall project
+* got migrate working
+* got unittest working
 
 T - Dashboard -> Customers/New
 . replaced previous multi step form with newer, cleaner form 
