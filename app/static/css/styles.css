@@ -1,11 +1,9 @@
 .main-menu {
   background: var(--bs-border-color);
-  border-color: #d1d5de;
   padding: 0;
 }
 
 .dash-content {
-  height: 79vh;
   padding-right: 0;
   padding-left: 0;
   padding-top: 1rem;
@@ -51,7 +49,7 @@
 }
 
 .index-hero {
-  height: 79vh;
+  height: 85vh;
   background: radial-gradient(rgba(5,11,58,0.39), rgba(2,15,25,0.89) 99%), url("../img/hero2.jpg") center / cover no-repeat, var(--bs-orange);
   color: var(--bs-white);
   text-shadow: 0px 0px, 0px 0px;

@@ -1,146 +1,81 @@
 {% extends "base.html" %}
 
 {% block head %}
-  {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/Navbar-Centered-Links-icons.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="javascript" href="{{ url_for('static', filename='js/dashboard.js') }}">
+	{{ super() }}
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/Navbar-Centered-Links-icons.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+	<link rel="javascript" href="{{ url_for('static', filename='js/dashboard.js') }}">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/multipart_form.css') }}">
-    <script type='text/javascript' src="{{ url_for('static', filename='js/multipart_form.js') }}"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/ms_form.css') }}">
+	<script type='text/javascript' src="{{ url_for('static', filename='js/ms_form.js') }}"></script>
 {% endblock %}
 
 {% block app_content %}
-<div class="container dash-content">
-    <div class="row">
-    <h2 class="display-6 mt-2">Dashboard</h2>
-        <div class="col py-3">
-            <div>
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">Customers</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">New</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" role="tabpanel" id="tab-1">
+<section class="container dash-content">
+	<div class="row">
+	<h2 class="display-6 mt-2">Dashboard</h2>
+		<div class="col py-3">
+			<div>
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">Customers</a></li>
+					<li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">New</a></li>
+				</ul>
+				<div class="tab-content">
 
-                        <div class="dash-customer-listing">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th style="text-align: center;">Actions</th>
-                                            <th>Full name</th>
-                                            <th>Email</th>
-                                            <th><br>Phone</th>
-                                            <th>SSN</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for c in customers %}
-                                        <tr>
-                                            <td class="dash-centered">
-                                                <button id="{{ "btn-submit-%d" % c.id }}" class="btn btn-primary btn-sm">Delete</button>
-                                            </td>
-                                            <td><a href="{{ url_for('main.edit_customer', customer_id=c.id) }}">{{ c.first_name + ' ' + c.last_name }}</a></td>
-                                            <td>{{ c.email }}</td>
-                                            <td>{{ c.phone }}</td>
-                                            <td>{{ c.ssn }}</td>
-                                        {% endfor %}
-                                        
-                                </table>
-                            </div>
-                        </div>
+					<!-- Tab 1 -->
+					<div class="tab-pane active" role="tabpanel" id="tab-1">
 
-                    </div>
+						<div class="dash-customer-listing">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th style="text-align: center;">Actions</th>
+											<th>Full name</th>
+											<th>Email</th>
+											<th><br>Phone</th>
+											<th>SSN</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for c in customers %}
+										<tr>
+											<td class="dash-centered">
+												<button id="{{ "btn-submit-%d" % c.id }}" class="btn btn-primary btn-sm">Delete</button>
+											</td>
+											<td><a href="{{ url_for('main.edit_customer', customer_id=c.id) }}">{{ c.first_name + ' ' + c.last_name }}</a></td>
+											<td>{{ c.email }}</td>
+											<td>{{ c.phone }}</td>
+											<td>{{ c.ssn }}</td>
+										{% endfor %}
+										
+								</table>
+							</div>
+						</div>
 
-                    <!-- Tab 2 -->
-                    <div class="tab-pane" role="tabpanel" id="tab-2">
+					</div> <!-- Tab 1 -->
 
-                        {% include 'multipart_form.html' %}
+					<!-- Tab 2 -->
+					<div class="tab-pane" role="tabpanel" id="tab-2">
 
-                    </div>
-            </div>
-        </div>
-    </div>
-</div>
+						{% include './ms_form.html' %}
+
+					</div> <!-- Tab 2 -->
+
+			</div>
+		</div>
+	</div>
+</section>
 {% endblock %}
 
 {% block scripts %}
-   {{ super() }}
+	{{ super() }}
 
-   <!-- Optional JavaScript -->
-   <script type='text/javascript' src='#'></script>
-   <script type='text/javascript' src='#'></script>
-   <script type='text/javascript' src='#'></script>
-   <script type='text/javascript'>
-       $(document).ready(function() {
-           var current_fs, next_fs, previous_fs; //fieldsets
-           var opacity;
-           $(".next").click(function() {
-               current_fs = $(this).parent();
-               next_fs = $(this).parent().next();
-               //Add Class Active
-               $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-               //show the next fieldset
-               next_fs.show();
-               //hide the current fieldset with style
-               current_fs.animate({
-                   opacity: 0
-               }, {
-                   step: function(now) {
-                       // for making fielset appear animation
-                       opacity = 1 - now;
-                       current_fs.css({
-                           'display': 'none',
-                           'position': 'relative'
-                       });
-                       next_fs.css({
-                           'opacity': opacity
-                       });
-                   },
-                   duration: 600
-               });
-           });
-           $(".previous").click(function() {
-               current_fs = $(this).parent();
-               previous_fs = $(this).parent().prev();
-               //Remove class active
-               $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-               //show the previous fieldset
-               previous_fs.show();
-               //hide the current fieldset with style
-               current_fs.animate({
-                   opacity: 0
-               }, {
-                   step: function(now) {
-                       // for making fielset appear animation
-                       opacity = 1 - now;
-                       current_fs.css({
-                           'display': 'none',
-                           'position': 'relative'
-                       });
-                       previous_fs.css({
-                           'opacity': opacity
-                       });
-                   },
-                   duration: 600
-               });
-           });
-           $('.radio-group .radio').click(function() {
-               $(this).parent().find('.radio').removeClass('selected');
-               $(this).addClass('selected');
-           });
-           $(".submit").click(function() {
-               return false;
-           })
-       });
-   </script>
-   <script type='text/javascript'>
-       var myLink = document.querySelector('a[href="#"]');
-       myLink.addEventListener('click', function(e) {
-           e.preventDefault();
-       });
-   </script>
+	<!-- Optional JavaScript -->
 {% endblock %}
+
+

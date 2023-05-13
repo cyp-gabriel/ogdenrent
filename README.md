@@ -3,13 +3,8 @@
 ## Current
 
 ### Last Tasks Completed
-- added formatting to new_application template
-- refactored header and footer into base template
-
-* T - update database scheme with new fields
-
 T - Dashboard -> Customers/New
-. added UI portion of multi part form
+. replaced previous multi step form with newer, cleaner form 
 
 T - Home -> Sign up
 . finish adding rest of controls
