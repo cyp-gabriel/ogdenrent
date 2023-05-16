@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% from 'bootstrap5/form.html' import render_form %}
+
 {% block head %}
 	{{ super() }}
 	<link
@@ -17,61 +19,21 @@
 		<div class="col-md-3 bg-light">
 			<h2>Login</h2>
 
-			<form method="post" action="{{ url_for('auth.register') }}">
-				<fieldset class="form-field py-1 d-flex justify-content-between">
-					{{ form.email.label }}
-					{{ form.email }}
-						{% if form.email.errors %}
-							<ul class="errors">
-								{% for error in form.email.errors %}
-								<li>{{ error }}</li>
-								{% endfor %}
-							</ul>
-						{% endif %}
-				</fieldset>
-
-			<form method="post" action="{{ url_for('auth.register') }}">
-				<fieldset class="form-field py-1 d-flex justify-content-between">
-					{{ form.username.label }}
-					{{ form.username }}
-						{% if form.username.errors %}
-							<ul class="errors">
-								{% for error in form.username.errors %}
-								<li>{{ error }}</li>
-								{% endfor %}
-							</ul>
-						{% endif %}
-				</fieldset>
-
-				<fieldset class="form-field py-1 d-flex justify-content-between">
-					{{ form.password.label }}
-					{{ form.password }}
-						{% if form.password.errors %}
-						<ul class="errors">
-							{% for error in form.password.errors %}
-							<li>{{ error }}</li>
-							{% endfor %}
-						</ul>
-						{% endif %}
-				</fieldset>
-
-				<fieldset class="form-field py-1 d-flex justify-content-between">
-					{{ form.password2.label }}
-					{{ form.password2 }}
-						{% if form.password2.errors %}
-						<ul class="errors">
-							{% for error in form.password2.errors %}
-							<li>{{ error }}</li>
-							{% endfor %}
-						</ul>
-						{% endif %}
-				</fieldset>
-
-				<fieldset class="form-field d-flex justify-content-end">
-					{{ form.submit() }}
-				</fieldset>
+			{% from "_formhelpers.html" import render_field %}
+			<form method='POST' action='{{ url_for('auth.register') }}'>
+			{{ form.csrf_token }}
+				<dl>
+					{{ render_field(form.email) }}
+					{{ render_field(form.username) }}
+					{{ render_field(form.password) }}
+					{{ render_field(form.password2) }}
+				</dl>
+				<p><input type=submit value=Register></p>
 			</form>
 
+			<p class="pt5">
+				<strong>{{ message }}</strong>
+			</p>
 		</div>
 		<!-- col -->
 	</div>

@@ -1,10 +1,11 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous.url_safe import URLSafeTimedSerializer as Serializer
 from flask_login import UserMixin, AnonymousUserMixin
+import jwt
 
 from flask_login import UserMixin
 from flask import current_app, url_for
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from . import db
 
 from . import login_manager
@@ -97,13 +98,42 @@ class User(UserMixin, db.Model):
         return json_user
 
     def generate_confirmation_token(self, expiration=3600):
-        s = Serializer(current_app.config['SECRET_KEY'], expiration)
-        return s.dumps({'confirm': self.id}).decode('utf-8')
+        # s = Serializer(current_app.config['SECRET_KEY'], expiration)
+        # return s.dumps({'confirm': self.id}).decode('utf-8')
+        now = datetime.now(timezone.utc)
+        later = now + timedelta(seconds=expiration)
+        timestamp = later.timestamp()
+        token = jwt.encode(
+            {
+                "exp": timestamp,
+                "confirm": self.id
+            },
+
+            current_app.config['SECRET_KEY'],
+            algorithm="HS256"
+        )
+
+        return token
 
     def confirm(self, token):
-        s = Serializer(current_app.config['SECRET_KEY'])
+        # s = Serializer(current_app.config['SECRET_KEY'])
+        # try:
+        #     data = s.loads({'confirm': self.id})
+        # except:
+        #     return False
+        # if data.get('confirm') != self.id:
+        #     return False
+        # self.confirmed = True
+        # db.session.add(self)
+        # return True
+
         try:
-            data = s.loads(token.encode('utf-8'))
+            data = jwt.decode(
+                token,
+                current_app.config['SECRET_KEY'],
+                leeway=10,
+                algorithms=["HS256"]
+            )
         except:
             return False
         if data.get('confirm') != self.id:

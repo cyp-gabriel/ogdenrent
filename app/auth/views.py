@@ -1,4 +1,5 @@
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for, flash, \
+    g
 from flask_login import login_user, logout_user, login_required, \
     current_user
 from . import auth
@@ -50,17 +51,21 @@ def logout():
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
+    message = ''
     if form.validate_on_submit():
         user = User(email=form.email.data.lower(),
                     username=form.username.data,
                     password=form.password.data)
+        
         db.session.add(user)
         db.session.commit()
-        # token = user.generate_confirmation_token()
-        # send_email(user.email, 'Confirm Your Account',
-        #            'auth/email/confirm', user=user, token=token)
+        token = user.generate_confirmation_token()
+        send_email(user.email, 'Confirm Your Account', 'auth/email/confirm', user=user, token=token)
+
+        g.current_user = user
+
         flash('A confirmation email has been sent to you by email.')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('auth.unconfirmed'))
     return render_template('auth/register.html', form=form)
 
 
@@ -85,6 +90,12 @@ def resend_confirmation():
                'auth/email/confirm', user=current_user, token=token)
     flash('A new confirmation email has been sent to you by email.')
     return redirect(url_for('main.index'))
+
+@auth.route('/force_confirm')
+@login_required
+def force_confirm():
+    token = current_user.generate_confirmation_token()
+    return redirect(url_for('auth.confirm', token=token))
 
 
 @auth.route('/change-password', methods=['GET', 'POST'])

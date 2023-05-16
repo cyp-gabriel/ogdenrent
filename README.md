@@ -2,27 +2,28 @@
 
 ## Current Tasks
 
-T - API: active_customer
-* added api, auth blueprints
-* reworked file structure of overall project
-* got migrate working
-* got unittest working
-* got test_register_and_login working
+TODO: Get test_client working
+[X] - send a confirmation token
+[X] - log out
 
-T - unittest: get confirm working
+[X] - Do full, successful use case of logging in, getting confirmed
+[X] - Add 'Log out' to base.html
 
-T - Dashboard -> Customers/New
-. replaced previous multi step form with newer, cleaner form 
+## Notes
 
-T - Home -> Sign up
-. finish adding rest of controls
-. test
+### test_client.py
 
-T - Dashboard -> Customers/New
-. add new_application
+Register a new User account
 
-## Use Cases
+	User
+	+ email: cabalscorner@gmail.com
+	+ username: boone_cabal
+	+ password: bogh
 
-Create customer
-Go to Dashboard -> Customers
-// It should show all customers in list
+	view: auth/register
+
+Login with the new User account
+
+Send a confirmation token
+
+Log out

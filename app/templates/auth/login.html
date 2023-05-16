@@ -18,6 +18,7 @@
 			<h2>Login</h2>
 
 			<form method="post" action="{{ url_for('auth.login') }}">
+				{{ form.csrf_token }}
 				<fieldset class="form-field py-1 d-flex justify-content-between">
 					{{ form.email.label }}
 					{{ form.email }}

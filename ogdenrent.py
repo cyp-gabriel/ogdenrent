@@ -61,7 +61,14 @@ def	deploy():
     #	create or	update user	roles
     Role.insert_roles()
 
-    # insert one user
-    u = User(email='john@example.com', username='john', password='cat')
-    db.session.add(u)
+    # insert admin user
+    admin_role = Role.query.filter_by(name='Administrator').first()
+    admin = User(
+        email='contact@boonecabal.co', 
+        username='admin', 
+        password='Bogh0428$',
+        role_id=admin_role.id)
+    admin.role_id = admin_role.id
+
+    db.session.add(admin)
     db.session.commit()
