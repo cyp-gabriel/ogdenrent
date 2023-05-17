@@ -1,4 +1,6 @@
+{% from "_formhelpers.html" import render_field %}
 <form id="stepped" action="#" method="post">
+	{{ form.csrf_token }}
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-12">
@@ -18,42 +20,43 @@
 						<h3 class="py-3">Basic Information</h3>
 						<div class="row justify-content-center">
 							<div class="col pe-md-4">
-								<div class="form-group">
-									<label for="first_name">First name</label>
-									<input type="text" id="first_name" class="form-control">
-								</div>
+								{{ render_field(form.first_name) }}
 							</div>
 							<div class="col pe-md-4">
-								<div class="form-group">
-									<label for="last_name">Last name</label>
-									<input type="text" id="last_name" class="form-control">
-								</div>
+								{{ render_field(form.last_name) }}
 							</div>
 							<div class="col">
-								<div class="form-group">
-									<label for="email">Email</label>
-									<input type="email" id="email" class="form-control">
-								</div>
+								{{ render_field(form.dob) }}
 							</div>
 						</div>
 						<div class="row justify-content-center">
 							<div class="col pe-md-4">
-								<div class="form-group">
-									<label for="phone">Phone</label>
-									<input type="text" id="phone" class="form-control">
-								</div>
+								{{ render_field(form.phone) }}
 							</div>
 							<div class="col pe-md-4">
-								<div class="form-group">
-									<label for="ssn">Social Security #</label>
-									<input type="text" id="ssn" class="form-control">
-								</div>
+								{{ render_field(form.ssn) }}
 							</div>
 							<div class="col">
-								<div class="form-group">
-									<label for="dob">Date of birth</label>
-									<input type="date" id="dob" class="form-control">
-								</div>
+								{{ render_field(form.email) }}
+							</div>
+						</div>
+						<div class="row justify-content-center">
+							<div class="col pe-md-4">
+								{{ render_field(form.driver_license) }}
+							</div>
+							<div class="col">
+								{{ render_field(form.state_id) }}
+							</div>
+						</div>
+						<div class="row justify-content-center">
+							<div class="col pe-md-4">
+								{{ render_field(form.num_adults) }}
+							</div>
+							<div class="col pe-md-4">
+								{{ render_field(form.num_kids) }}
+							</div>
+							<div class="col">
+								{{ render_field(form.num_pets) }}
 							</div>
 						</div>
 						<!-- /.row -->
@@ -62,27 +65,49 @@
 						<h3 class="py-3">Previous Address</h3>
 						<div class="row justify-content-center">
 							<div class="col pe-md-4">
-								<label for="prev_addr_street1">Street #1</label>
-								<input type="text" id="prev_addr_street1" class="form-control">
+								{{ render_field(form.prev_addr_street1) }}
 							</div>
 							<div class="col">
-								<label for="prev_addr_street2">Street #2</label>
-								<input type="text" id="prev_addr_street2" class="form-control">
+								{{ render_field(form.prev_addr_street2) }}
 							</div>
 						</div> <!-- /.row -->
 
 						<div class="row justify-content-center">
 							<div class="col pe-md-4">
-								<label for="prev_addr_city">City</label>
-								<input type="text" id="prev_addr_city" class="form-control">
+								{{ render_field(form.prev_addr_city) }}
 							</div>
 							<div class="col pe-md-4">
-								<label for="prev_addr_state">State</label>
-								<input type="text" id="prev_addr_state" class="form-control">
+								{{ render_field(form.prev_addr_state) }}
 							</div>
 							<div class="col">
-								<label for="prev_addr_zip">Zip</label>
-								<input type="text" id="prev_addr_zip" class="form-control">
+								{{ render_field(form.prev_addr_zip) }}
+							</div>
+						</div> <!-- /.row -->
+
+						<div class="row justify-content-center">
+							<div class="col pe-md-4">
+								{{ render_field(form.contact_to_verify_last_addr) }}
+							</div>
+							<div class="col">
+								{{ render_field(form.contact_to_verify_last_phone) }}
+							</div>
+						</div> <!-- /.row -->
+
+						<div class="row justify-content-center">
+							<div class="col pe-md-4">
+								{{ render_field(form.current_employer) }}
+							</div>
+							<div class="col">
+								{{ render_field(form.position) }}
+							</div>
+						</div> <!-- /.row -->
+
+						<div class="row justify-content-center">
+							<div class="col pe-md-4">
+								{{ render_field(form.emp_contact_name) }}
+							</div>
+							<div class="col">
+								{{ render_field(form.emp_contact_phone) }}
 							</div>
 						</div> <!-- /.row -->
 					</div>
@@ -90,41 +115,121 @@
 						<h3 class="py-3">Criminal Background</h3>
 						<div class="row justify-content-center">
 							<div class="col pe-md-4">
-								<div class="form-group">
-									<label for="is_felon">Felon?</label>
-									<input type="text" id="is_felon" class="form-control">
-								</div>
+								{{ render_field(form.is_felon) }}
 							</div>
 							<div class="col pe-md-4">
-								<div class="form-group">
-									<label for="is_on_registry">On Registry?</label>
-									<input type="text" id="is_on_registry" class="form-control">
-								</div>
+								{{ render_field(form.is_on_registry) }}
 							</div>
 						</div> <!-- /.row -->
 
 						<div class="row justify-content-center">
 							<div class="col pe-md-4">
-								<div class="form-group">
-									<label for="po_name">PO Name</label>
-									<input type="text" id="po_name" class="form-control">
-								</div>
+								{{ render_field(form.po_name) }}
 							</div>
 							<div class="col pe-md-4">
-								<div class="form-group">
-									<label for="po_number">Phone</label>
-									<input type="text" id="po_number" class="form-control">
-								</div>
+								{{ render_field(form.po_phone) }}
 							</div>
 						</div> <!-- /.row -->
 
+						<div class="row justify-content-center">
+							<div class="col pe-md-4">
+								{{ render_field(form.time_on_job) }}
+							</div>
+							<div class="col pe-md-4">
+								{{ render_field(form.monthly_net_income) }}
+							</div>
+							<div class="col">
+								{{ render_field(form.paydays) }}
+							</div>
+						</div> <!-- /.row -->
+
+						<div class="row justify-content-center">
+							<div class="col pe-md-4">
+								{{ render_field(form.receiving_ssi) }}
+							</div>
+							<div class="col pe-md-4">
+								{{ render_field(form.monthly_ssi_amount) }}
+							</div>
+						</div>
+
+						<div class="row justify-content-center">
+							<div class="col pe-md-4">
+								{{ render_field(form.best_hours) }}
+							</div>
+							<div class="col pe-md-4">
+								{{ render_field(form.between_x_AM) }}
+							</div>
+							<div class="col">
+								{{ render_field(form.between_y_PM) }}
+							</div>
+						</div> <!-- /.row -->
+
+						<div class="row justify-content-center">
+							<div class="col pe-md-4">
+								{{ render_field(form.auto_make) }}
+							</div>
+							<div class="col pe-md-4">
+								{{ render_field(form.auto_model) }}
+							</div>
+							<div class="col pe-md-4">
+								{{ render_field(form.auto_color) }}
+							</div>
+							<div class="col">
+								{{ render_field(form.auto_plate) }}
+							</div>
+						</div> <!-- /.row -->
+
+						<div class="row justify-content-center">
+							<div class="col pe-md-4">
+								{{ render_field(form.emergency_contact_name) }}
+							</div>
+							<div class="col pe-md-4">
+								{{ render_field(form.emergency_contact_phone) }}
+							</div>
+						</div>
+
+						<div class="row justify-content-center">
+							<div class="col pe-md-4">
+								{{ render_field(form.rented_here_before) }}
+							</div>
+							<div class="col pe-md-4">
+								{{ render_field(form.rented_here_at_addr) }}
+							</div>
+						</div>
 
 					</div>
+
 					<div class="steps">
-						<div class="form-group">
-							<label for="inp4">Label 4</label>
-							<input type="text" id="inp4" class="form-control">
+
+						<div class="row justify-content-center">
+							<div class="col pe-md-4">
+								{{ render_field(form.has_service_animal) }}
+							</div>
+							<div class="col pe-md-4">
+								{{ render_field(form.former_military) }}
+							</div>
 						</div>
+
+						<div class="row justify-content-center">
+							<div class="col pe-md-4">
+								{{ render_field(form.is_felon) }}
+							</div>
+							<div class="col pe-md-4">
+								{{ render_field(form.is_on_registry) }}
+							</div>
+						</div>
+
+						<div class="row justify-content-center">
+							<div class="col pe-md-4">
+								{{ render_field(form.po_name) }}
+							</div>
+							<div class="col pe-md-4">
+								{{ render_field(form.po_phone) }}
+							</div>
+							<div class="col">
+								{{ render_field(form.offender_number) }}
+							</div>
+						</div> <!-- /.row -->
 					</div>
 				</div>
 				<div class="col-md-8 text-right">

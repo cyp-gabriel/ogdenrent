@@ -24,12 +24,8 @@ def set_active_customer(id):
         session['active_customer_id'] = c.id
     return jsonify({'active_customer_id': c.id})
  
-@api.route('/delete_customer', methods=['DELETE'])
-def delete_customer():
-    request_data = request.get_json()
-    if 'id' not in request_data:
-        return jsonify({'error': 'id parameter is required'}), 400
-    id = request_data['id']
+@api.route('/delete_customer/<int:id>', methods=['DELETE'])
+def delete_customer(id):
     customer = Customer.query.get_or_404(id)
     db.session.delete(customer)
     db.session.commit()
