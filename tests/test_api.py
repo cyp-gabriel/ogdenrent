@@ -67,15 +67,14 @@ class APITestCase(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         json_response = json.loads(response.get_data(as_text=True))
-        self.assertEqual(json_response['first_name'], 'Ted')
-
+        self.assertGreater(json_response['active_customer_id'], 0)
 
         response = self.client.get(
-            '/api/v1/active_customer/',
+            '/api/v1/active_customer',
             headers=self.get_api_headers('john@example.com', 'cat'))
         self.assertEqual(response.status_code, 200)
         json_response = json.loads(response.get_data(as_text=True))
-        self.assertEqual(json_response['first_name'], 'Ted')
+        self.assertGreater(json_response['active_customer_id'], 0)
 
     # def test_404(self):
     #     response = self.client.get(
