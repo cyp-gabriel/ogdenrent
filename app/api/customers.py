@@ -3,6 +3,7 @@ from .. import db
 from . import api
 from ..models import Customer
 from ..exceptions import ValidationError
+import os
 
 @api.route('/active_customer', methods=['GET'])
 def get_active_customer():
@@ -40,3 +41,26 @@ def get_customers():
 def get_customer(id):
     customer = Customer.query.get_or_404(id)
     return jsonify(customer.to_json())
+
+@api.route('/customer_photo', methods=['POST'])
+def set_customer_picture():
+        # Check if a file was uploaded
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file uploaded'}), 400
+
+    file = request.files['file']
+    filename = os.path.basename(file.filename)
+    
+    customer_id = int(session['active_customer_id'])
+
+    # Save the file to the uploads folder
+    file_path = os.path.join(os.path.abspath('app/uploads/'), filename)
+    
+    with open(file_path, 'wb') as f:
+        f.write(file.read())
+
+    # Return a response with the file name and path
+    return jsonify({
+        'filename': filename,
+        'filepath': f'uploads/customer{customer_id}/{filename}'
+    }), 200

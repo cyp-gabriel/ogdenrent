@@ -192,25 +192,25 @@ class	Role(db.Model):
 
 	@staticmethod
 	def	insert_roles():
-				roles	=	{
-						'User':	[Permission.FOLLOW,	Permission.COMMENT,	Permission.WRITE],
-						'Owner': [Permission.WRITE,	Permission.COMMENT,	Permission.MODERATE],
-						'Administrator': [Permission.FOLLOW, Permission.COMMENT, Permission.WRITE, Permission.MODERATE,	Permission.ADMIN],
-				}
-				default_role = 'User'
+		roles	=	{
+				'User':	[Permission.FOLLOW,	Permission.COMMENT,	Permission.WRITE],
+				'Owner': [Permission.WRITE,	Permission.COMMENT,	Permission.MODERATE],
+				'Administrator': [Permission.FOLLOW, Permission.COMMENT, Permission.WRITE, Permission.MODERATE,	Permission.ADMIN],
+		}
+		default_role = 'User'
 
-				for	r	in roles:
-						role = Role.query.filter_by(name=r).first()
+		for	r	in roles:
+				role = Role.query.filter_by(name=r).first()
 
-						if role	is None:
-								role = Role(name=r)
-						role.reset_permissions()
-						for	perm in	roles[r]:
-								role.add_permission(perm)
-						role.default = (role.name	== default_role)
-						db.session.add(role)
-				
-				db.session.commit()
+				if role	is None:
+						role = Role(name=r)
+				role.reset_permissions()
+				for	perm in	roles[r]:
+						role.add_permission(perm)
+				role.default = (role.name	== default_role)
+				db.session.add(role)
+		
+		db.session.commit()
 
 class	Customer(db.Model):
 	__tablename__	=	'customers'
@@ -274,6 +274,8 @@ class	Customer(db.Model):
 
 	signature	=	db.Column(db.String(64))
 	date_signed	=	db.Column(db.DateTime, default=datetime.utcnow)
+
+	photo = db.Column(db.String(64))
 
 	def	__init__(self, **kwargs):
 		super(Customer,	self).__init__(**kwargs)

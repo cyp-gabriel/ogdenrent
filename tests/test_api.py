@@ -1,6 +1,7 @@
 import unittest
 import json
-import re
+import io
+import os
 from base64 import b64encode
 from app import create_app, db
 from app.models import User, Role, Customer
@@ -36,28 +37,8 @@ class APITestCase(unittest.TestCase):
         db.session.add(u1)
         db.session.commit()
         
-        ted = Customer()
-        ted.first_name = 'Ted'
-        ted.last_name = 'Bell'
-        from datetime import datetime
-        ted.dob = datetime.utcnow()
-        ted.phone = '555-555-5555'
-        ted.ssn = '123-45-6789'
-        ted.email = 'ted@example.com'
-
-        ted.num_pets = 0
-        ted.num_kids = 0
-        ted.has_pets = False
-
-        ted.prev_addr_street1 = '123 Main St'
-        ted.prev_addr_street2 = 'Apt 1'
-        ted.prev_addr_city = 'New York'
-        ted.prev_addr_state = 'NY'
-        ted.prev_addr_zip = '10001'
-
-        db.session.add(ted)
-        db.session.commit()
-
+        ted = self.make_ted()
+        
         response = self.client.put(
             '/api/v1/active_customer/{}'.format(ted.id),
             headers=self.get_api_headers('john@example.com', 'cat'))
@@ -110,3 +91,66 @@ class APITestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         json_response = json.loads(response.get_data(as_text=True))
         self.assertEqual(json_response['username'], 'susan')
+
+    def test_customer_photo(self):
+        r = Role.query.filter_by(name='User').first()
+        self.assertIsNotNone(r)
+        u1 = User(email='john@example.com', username='john',
+                  password='cat', confirmed=True, role=r)
+        db.session.add(u1)
+        db.session.commit()
+        
+        ted = self.make_ted()
+
+        response = self.client.put(
+            '/api/v1/active_customer/{}'.format(ted.id),
+            headers=self.get_api_headers('john@example.com', 'cat'))
+
+        self.assertEqual(response.status_code, 200)
+        json_response = json.loads(response.get_data(as_text=True))
+        self.assertGreater(json_response['active_customer_id'], 0)
+        
+        # Create an in-memory file object from the image data
+        image_path = '/home/bc/ldev/python/flask/ogdenrent/assets/pictures/a.jpeg'
+        with open(image_path, 'rb') as f:
+            image_data = f.read()
+        image_file = io.BytesIO(image_data)
+        image_file.filename = os.path.basename(image_path)
+
+        # Make a POST request to the /customer_photo endpoint
+        response = self.client.post('/api/v1/customer_photo',
+            headers=self.get_api_headers('john@example.com', 'cat'),
+            content_type='multipart/form-data',
+            buffered=True,
+            follow_redirects=True,
+            data={
+                'file': (image_file, image_file.filename)
+            })
+
+        # Assert that the response status code is 200
+        self.assertEqual(response.status_code, 200)
+    
+    def make_ted(self):
+        
+        ted = Customer()
+        ted.first_name = 'Ted'
+        ted.last_name = 'Bell'
+        from datetime import datetime
+        ted.dob = datetime.utcnow()
+        ted.phone = '555-555-5555'
+        ted.ssn = '123-45-6789'
+        ted.email = 'ted@example.com'
+
+        ted.num_pets = 0
+        ted.num_kids = 0
+        ted.has_pets = False
+
+        ted.prev_addr_street1 = '123 Main St'
+        ted.prev_addr_street2 = 'Apt 1'
+        ted.prev_addr_city = 'New York'
+        ted.prev_addr_state = 'NY'
+        ted.prev_addr_zip = '10001'
+
+        db.session.add(ted)
+        db.session.commit()
+        return ted

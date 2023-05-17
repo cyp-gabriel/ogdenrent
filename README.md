@@ -7,3 +7,4 @@
 * added remaining fields to models and forms
 * added all fields to Dashboard > Customers > New
 * dashboard.js: got /api/v1/active_customer<int:id> working
+* got /customer_photo working

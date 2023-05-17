@@ -1,6 +1,7 @@
 /assets/
 intlTelInput
 .vscode
+tmp
 
 
 *.py[cod]

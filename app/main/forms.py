@@ -65,4 +65,7 @@ class CustomerApplicationForm(FlaskForm):
 
    signature	= StringField('signature')
    date_signed	= StringField('date_signed')
+
+   photo = StringField('Photo')
+
    submit = SubmitField('Submit')
