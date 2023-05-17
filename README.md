@@ -2,28 +2,5 @@
 
 ## Current Tasks
 
-TODO: Get test_client working
-[X] - send a confirmation token
-[X] - log out
-
-[X] - Do full, successful use case of logging in, getting confirmed
-[X] - Add 'Log out' to base.html
-
-## Notes
-
-### test_client.py
-
-Register a new User account
-
-	User
-	+ email: cabalscorner@gmail.com
-	+ username: boone_cabal
-	+ password: bogh
-
-	view: auth/register
-
-Login with the new User account
-
-Send a confirmation token
-
-Log out
+* Started working on Dashboard -> Delete Customer.  It seems that I need to provide login credentials in order to use the API: /api/v2/delete_custome<int:id>.
+* dashboard.js/html: added JavaScript to handle deleting Customer.

@@ -13,3 +13,10 @@ def set_active_customer(id):
 	active_customer = Customer.query.get_or_404(id)
 	g.session['active_customer'] = id
 	return jsonify(active_customer.to_json())
+ 
+@api.route('/delete_customer/<int:id>', methods=['DELETE'])
+def delete_customer(id):
+    customer = Customer.query.get_or_404(id)
+    db.session.delete(customer)
+    db.session.commit()
+    return f'Customer with id {id} has been deleted'

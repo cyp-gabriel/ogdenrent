@@ -36,7 +36,7 @@
 					<ul class="navbar-nav ms-auto">
 						<li class="nav-item">
 							{% if current_user.is_authenticated %}
-							<a class="nav-link active fs-6" data-bss-hover-animate="pulse" href="{{ url_for('auth.logout') }}">Log out</a>
+							<a class="nav-link active fs-6" data-bss-hover-animate="pulse" href="{{ url_for('auth.logout') }}"><small class="text-muted">Log out</small></a>
 							{% endif %}
 						</li>
 						<li class="nav-item">
