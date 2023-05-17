@@ -23,11 +23,6 @@ login_manager.anonymous_user = AnonymousUser
 def	load_user(user_id):
 	return User.query.get(int(user_id))
 
-class	AppStateVariables(db.Model):
-	__tablename__	=	'app_state_variables'
-	id = db.Column(db.Integer, primary_key=True)
-	active_customer	=	db.Column(db.Integer)	
-
 class	Permission:	
 	FOLLOW = 1 
 	COMMENT	=	2	

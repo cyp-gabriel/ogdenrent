@@ -56,7 +56,9 @@ def test(coverage, test_names):
 def	deploy():
     """Run deployment	tasks."""
     #	migrate	database to	latest revision
-    upgrade()
+    #upgrade()
+    db.create_all()
+    db.session.commit()
 
     #	create or	update user	roles
     Role.insert_roles()
@@ -67,8 +69,27 @@ def	deploy():
         email='contact@boonecabal.co', 
         username='admin', 
         password='Bogh0428$',
-        role_id=admin_role.id)
+        role_id=admin_role.id,
+        confirmed=True)
     admin.role_id = admin_role.id
 
     db.session.add(admin)
+    db.session.commit()
+
+    from datetime import datetime
+    ted = Customer()
+    ted.first_name = 'Ted'
+    ted.last_name = 'Bell'
+    ted.dob = datetime.now()
+    ted.email = 'ted@bell.com'
+    ted.driver_license = '12345'
+    ted.phone = '555-555-5555'
+    ted.signature = 'Ted'
+    ted.date_signed = datetime.now()
+    ted.emergency_contact_name = 'Mai'
+    ted.emergency_contact_phone = '555-555-5555'
+    ted.contact_to_verify_last_addr = 'Rhomboid'
+    ted.contact_to_verify_last_phone = '555-555-5555'
+    
+    db.session.add(ted)
     db.session.commit()

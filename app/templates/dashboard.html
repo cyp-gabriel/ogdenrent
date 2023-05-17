@@ -34,23 +34,25 @@
 								<table class="table">
 									<thead>
 										<tr>
-											<th style="text-align: center;">Actions</th>
 											<th>Full name</th>
 											<th>Email</th>
 											<th><br>Phone</th>
 											<th>SSN</th>
+											<th style="text-align: center;">Actions</th>
 										</tr>
 									</thead>
 									<tbody>
 										{% for c in customers %}
 										<tr>
-											<td class="dash-centered">
-												<button id="{{ "btn-submit-%d" % c.id }}" class="btn btn-primary btn-sm delete_button">Delete</button>
-											</td>
 											<td><a href="{{ url_for('main.edit_customer', customer_id=c.id) }}">{{ c.first_name + ' ' + c.last_name }}</a></td>
 											<td>{{ c.email }}</td>
 											<td>{{ c.phone }}</td>
 											<td>{{ c.ssn }}</td>
+											<td class="dash-centered">
+												<button id="{{ "btn-submit-%d" % c.id }}" type="button" class="btn btn-primary btn-sm delete_button">Delete</button>
+												<button id="{{ "btn-camera-%d" % c.id }}" type="button" class="btn btn-primary btn-sm camera_button">Camera</button>
+												<button id="{{ "btn-lease-report-%d" % c.id }}" type="button" class="btn btn-primary btn-sm lease_report_button">Lease</button>
+											</td>
 										{% endfor %}
 										
 								</table>
