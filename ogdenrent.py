@@ -66,9 +66,9 @@ def	deploy():
     # insert admin user
     admin_role = Role.query.filter_by(name='Administrator').first()
     admin = User(
-        email='contact@boonecabal.co', 
-        username='admin', 
-        password='Bogh0428$',
+        email='boone.cabal@gmail.com', 
+        username='grantaster', 
+        password='grantaster',
         role_id=admin_role.id,
         confirmed=True)
     admin.role_id = admin_role.id

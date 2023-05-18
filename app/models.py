@@ -40,6 +40,8 @@ class	User(UserMixin,	db.Model):
 
 	confirmed	=	db.Column(db.Boolean,	default=False)
 
+	active_customer_id = db.Column(db.Integer)
+
 	def	__init__(self, **kwargs):
 		super(User,	self).__init__(**kwargs)
 		if self.role is	None:

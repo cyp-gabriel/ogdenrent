@@ -124,7 +124,7 @@ class APITestCase(unittest.TestCase):
             buffered=True,
             follow_redirects=True,
             data={
-                'file': (image_file, image_file.filename)
+                'async-upload': (image_file, image_file.filename)
             })
 
         # Assert that the response status code is 200
